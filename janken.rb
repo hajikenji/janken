@@ -6,15 +6,18 @@ class Player
       puts "0:グー, 1:チョキ, 2:パー"
       # 代入  変数「input_hand」にプレイヤーの入力値を代入
       # ヒント  getsメソッドについて調べる
-      input_hand = gets.to_i
+      input_hand = gets.chomp
+      
+      p input_hand
       # whleループ  「input_hand」が「0, 1, 2」のいずれかだと繰り返し処理を終了、それ以外だと繰り返し処理を継続します(アルファベットなども含む）。
       while true
-        if input_hand == 0 || input_hand == 1 || input_hand == 2
-          return input_hand
+        if input_hand == "0" || input_hand == "1" || input_hand == "2"
+          return input_hand.to_i
+          p "a"
         else
           puts "数字を入力してください。"
           puts "0:グー, 1:チョキ, 2:パー"
-          input_hand = gets.to_i
+          input_hand = gets.chomp
         end
         # 記入 IF「input_hand」が「0, 1, 2」のいずれかの場合の処理
         # ヒント：include?メソッドについて調べてみましょう。
@@ -28,9 +31,9 @@ class Player
         # end IF文のend
       end
     end
-end
+  end
   # 相手が「0~2」の値をランダムに生成するロジックを書きます。
-class Enemy
+  class Enemy
     def hand
       random = Random.new
     #   puts random.rand(3)
@@ -46,6 +49,10 @@ class Enemy
       #「相手の手は#{相手の手}です。」と出力させます。
       puts "相手の手は#{janken[enemy_hand]}です。" # janken[1] みたいなイメージ
       # Playerクラスの戻り値とEnemyクラスの戻り値からじゃんけんするロジックを作成します。
+  
+      p player_hand
+      p enemy_hand
+  
       if  player_hand == enemy_hand 
         # Playerクラスの戻り値(player_hand)とEnemyクラスの戻り値(enemy_hand)の値が同じだった場合
         # 「あいこ」を出力します。
@@ -67,9 +74,9 @@ class Enemy
         #「false」を返してじゃんけんを終了させます。
       end
     end
-end
+  end
   # じゃんけんゲームを実行するロジックを書きます。
-class GameStart
+  class GameStart
     # selfを使用することで、GameStartをインスタンス化することなく、クラス名を使ってjankenponメソッドを呼び出せます。
     def self.jankenpon
       # 変数「player」にPlayerをインスタンス化したものを代入します。
@@ -87,6 +94,6 @@ class GameStart
         next_game = janken.pon(player.hand, enemy.hand)
       end
     end
-end
+  end
   # クラス名を使ってjankenponメソッドを呼び出します。
-GameStart.jankenpon
+  GameStart.jankenpon
